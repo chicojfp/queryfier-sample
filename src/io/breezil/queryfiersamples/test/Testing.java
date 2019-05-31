@@ -1,13 +1,11 @@
 package io.breezil.queryfiersamples.test;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import io.breezil.queryfiersamples.api.Dao;
-import io.breezil.queryfiersamples.api.filters.CityFilter;
+import io.breezil.queryfiersamples.api.filters.CityMultiFilter;
 import io.breezil.queryfiersamples.entities.City;
 
 public class Testing {
@@ -15,9 +13,13 @@ public class Testing {
 	public static void main(String[] args) {
 //		previousTest();
 		
-		CityFilter filter = new CityFilter();
-		filter.setCountry("Brazil");
-    	List<CityFilter> dados = new Dao().recuperarListaI(filter);
+		CityMultiFilter filter = new CityMultiFilter();
+		filter.addColumns("name", "population");
+		filter.addSortedColumns("name");
+		filter.getCountry().add("Brazil");
+		new Dao().recuperarLista(filter);
+//		filter.setMajor("Tulio");
+//		filter.addColumns("name", "state", "country");x
 	}
 
 	private static void previousTest() {

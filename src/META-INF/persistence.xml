@@ -11,6 +11,7 @@
 		<class>io.breezil.queryfiersamples.entities.City</class>
 		<class>io.breezil.queryfiersamples.entities.State</class>
 		<class>io.breezil.queryfiersamples.entities.Country</class>
+		<class>io.breezil.queryfiersamples.entities.Person</class>
 
 		<properties>
 			<property name="connection.driver_class"

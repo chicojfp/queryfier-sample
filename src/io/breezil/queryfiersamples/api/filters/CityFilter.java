@@ -5,23 +5,33 @@ import javax.ws.rs.QueryParam;
 import io.breezil.queryfier.engine.QBaseClass;
 import io.breezil.queryfier.engine.annotations.QEntity;
 import io.breezil.queryfier.engine.annotations.QField;
+import io.breezil.queryfier.engine.enums.JoinType;
 import io.breezil.queryfiersamples.entities.City;
 
 @QEntity(name = City.class, alias = "c")
 public class CityFilter extends QBaseClass {
+	@QueryParam(value="name")
 	String name;
 	
 	@QueryParam(value="major")
 	@QField(name="major.name")
 	String major;
 	
+	Long population;
+	
 	@QueryParam(value="country")
-	@QField(name="state.country.name")
+	@QField(name="state.country.name", join=JoinType.LEFT_JOIN)
 	String country;
 	
 	@QueryParam(value="state")
 	@QField(name="state.name")
 	String state;
+	
+	@Override
+	@QueryParam(value="column")
+	public void addColumn(String columnNames) {
+		super.addColumn(columnNames);
+	}
 	
 	public CityFilter() {
 		super();

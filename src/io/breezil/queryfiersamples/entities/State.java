@@ -15,11 +15,20 @@ public class State {
 	List<City> cities;
 	City capital;
 	String name;
-	String governor;
+	Person governor;
 	Number area;
 	Date foundation;
 	Integer id;
 	Country country;
+	
+	public State() {
+		
+	}
+
+	public State(String name, City capital) {
+		this.name = name;
+		this.capital = capital;
+	}
 
 	@Id
 	@GeneratedValue
@@ -48,11 +57,12 @@ public class State {
 		this.name = name;
 	}
 
-	public String getGovernor() {
+	@OneToOne()
+	public Person getGovernor() {
 		return governor;
 	}
 
-	public void setGovernor(String governor) {
+	public void setGovernor(Person governor) {
 		this.governor = governor;
 	}
 

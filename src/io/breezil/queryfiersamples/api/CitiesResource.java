@@ -59,10 +59,10 @@ public class CitiesResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public CityFilter getHello(@BeanParam CityFilter filter) {
+    public List<CityFilter> getHello(@BeanParam CityFilter filter) {
     	System.out.println(filter);
-    	List<CityFilter> dados = new Dao().recuperarListaI(filter);
-        return filter;
+    	List<CityFilter> dados = new Dao().recuperarLista(filter);
+        return dados;
     }
 
 }
