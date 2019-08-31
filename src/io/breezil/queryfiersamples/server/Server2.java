@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package io.breezil.queryfiersamples.api;
+package io.breezil.queryfiersamples.server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2010-2012 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,29 +37,32 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package io.breezil.queryfiersamples.api;
+package io.breezil.queryfiersamples.server;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.core.Application;
+import java.util.List;
+
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import io.breezil.queryfiersamples.api.filters.CityFilter;
 
 /**
- * JAX-RS Application class for this example.
  *
- * @author Martin Matula (martin.matula at oracle.com)
+ * @author Jakub Podlesak (jakub.podlesak at oracle.com)
  */
-public class JaxRsApplication extends Application {
-    private final Set<Class<?>> classes;
+@Path("cities")
+public class CitiesResource {
+    public static final String CLICHED_MESSAGE = "Hello World!";
 
-    public JaxRsApplication() {
-        HashSet<Class<?>> c = new HashSet<Class<?>>();
-        c.add(CitiesResource.class);
-        classes = Collections.unmodifiableSet(c);
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CityFilter> getHello(@BeanParam CityFilter filter) {
+    	System.out.println(filter);
+    	List<CityFilter> dados = new Dao().recuperarLista(filter);
+        return dados;
     }
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        return classes;
-    }
 }

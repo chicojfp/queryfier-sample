@@ -1,10 +1,7 @@
-package io.breezil.queryfiersamples.api;
-
-import java.awt.PageAttributes.MediaType;
+package io.breezil.queryfiersamples.server;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.ext.RuntimeDelegate;
 
 import org.glassfish.jersey.server.ResourceConfig;
