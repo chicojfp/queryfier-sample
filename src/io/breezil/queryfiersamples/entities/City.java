@@ -6,17 +6,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity(name="city")
 public class City {
 	String name;
-	String major;
-	Long pupulation;
+	Person major;
+	Long population;
 	Number area;
 	Date foundation;
 	Integer id;
 	State state;
 	
+	public City() {
+		
+	}
+	
+	public City(String name, Long area, Long population) {
+		this.name = name;
+		this.area = area;
+		this.population = population;
+	}
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -31,17 +41,19 @@ public class City {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMajor() {
+	
+	@OneToOne()
+	public Person getMajor() {
 		return major;
 	}
-	public void setMajor(String major) {
+	public void setMajor(Person major) {
 		this.major = major;
 	}
-	public Long getPupulation() {
-		return pupulation;
+	public Long getPopulation() {
+		return population;
 	}
-	public void setPupulation(Long pupulation) {
-		this.pupulation = pupulation;
+	public void setPopulation(Long population) {
+		this.population = population;
 	}
 	public Number getArea() {
 		return area;
@@ -56,7 +68,7 @@ public class City {
 		this.foundation = foundation;
 	}
 	
-	@ManyToOne
+	@ManyToOne()
 	public State getState() {
 		return state;
 	}

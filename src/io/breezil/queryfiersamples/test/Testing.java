@@ -1,23 +1,40 @@
 package io.breezil.queryfiersamples.test;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import io.breezil.queryfiersamples.api.Dao;
 import io.breezil.queryfiersamples.api.filters.CityFilter;
+import io.breezil.queryfiersamples.api.filters.CityMultiFilter;
 import io.breezil.queryfiersamples.entities.City;
+import io.breezil.queryfiersamples.server.Dao;
 
 public class Testing {
 	
 	public static void main(String[] args) {
-//		previousTest();
+		multiFilter();
 		
+//		singleFilter();
+	}
+
+	private static void singleFilter() {
 		CityFilter filter = new CityFilter();
+		filter.addColumns("name", "population");
+		filter.addSortedColumns("name");
+//		filter.addSortedColumns("country");
+		filter.setState("PE");
 		filter.setCountry("Brazil");
-    	List<CityFilter> dados = new Dao().recuperarListaI(filter);
+		Dao.instance().recuperarLista(filter);
+	}
+
+	private static void multiFilter() {
+		CityMultiFilter filter = new CityMultiFilter();
+		filter.addColumns("name", "population");
+		filter.addSortedColumns("name");
+//		filter.addSortedColumns("country");
+//		filter.getCountry().add("Brazil");
+//		filter.getCountry().add("Peru");
+		Dao.instance().recuperarLista(filter);
 	}
 
 	private static void previousTest() {
