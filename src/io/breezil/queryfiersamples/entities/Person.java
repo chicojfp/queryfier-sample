@@ -9,6 +9,10 @@ public class Person {
 	Integer id;
 	String name;
 	
+	public Person(String name) {
+		this.name = name;
+	}
+
 	@Id
 	@GeneratedValue
 	public Integer getId() {

@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import io.breezil.queryfier.engine.QBaseClass;
 import io.breezil.queryfier.engine.annotations.QEntity;
 import io.breezil.queryfier.engine.annotations.QField;
+import io.breezil.queryfier.engine.enums.CompType;
 import io.breezil.queryfier.engine.enums.JoinType;
 import io.breezil.queryfiersamples.entities.City;
 
@@ -17,13 +18,13 @@ public class CityMultiFilter extends QBaseClass {
 	List<String> name = new ArrayList<>();
 	
 	@QueryParam(value="major")
-	@QField(name="major.name", comparator="=")
+	@QField(name="major.name", comparator=CompType.EQUALS)
 	List<String> major = new ArrayList<>();
 	
 	Long population;
 	
 	@QueryParam(value="country")
-	@QField(name="state.country.name", join=JoinType.LEFT_JOIN, comparator=" IN (%s) ")
+	@QField(name="state.country.name", join=JoinType.LEFT_JOIN, comparator=CompType.IN)
 	List<String> country = new ArrayList<>();
 	
 	@QueryParam(value="state")
