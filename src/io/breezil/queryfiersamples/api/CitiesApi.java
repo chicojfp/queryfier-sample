@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.breezil.queryfiersamples.api.filters.CityDto;
 import io.breezil.queryfiersamples.api.filters.CityFilter;
 import io.breezil.queryfiersamples.server.Dao;
  
@@ -21,7 +22,7 @@ public class CitiesApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response get(@BeanParam CityFilter filter) {
     	
-    	List<CityFilter> dados = Dao.instance().recuperarLista(filter);
+    	List<CityDto> dados = Dao.instance().recuperarDTOs(filter);
     	
         return Response.ok(dados).build();
     }
