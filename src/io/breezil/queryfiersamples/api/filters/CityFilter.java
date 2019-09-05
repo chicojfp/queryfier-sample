@@ -16,8 +16,6 @@ import io.breezil.queryfier.engine.enums.JoinType;
 import io.breezil.queryfiersamples.entities.City;
 
 //@QEntity(name = City.class, alias = "c")
-@JsonInclude(value = Include.NON_NULL)
-@JsonIgnoreProperties(value = { "columns", "sortedColumns", "distinct" })
 public class CityFilter extends BaseFilter<City, CityDto> {
 	@QueryParam(value = "name")
 	List<String> name;

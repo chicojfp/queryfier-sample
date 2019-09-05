@@ -1,12 +1,20 @@
 package io.breezil.queryfiersamples.api.filters;
 
-public class CityDto {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value = Include.NON_NULL)
+public class CityDto extends BaseDto {
 	String name;
 	String major;
 	Long population;
 	Integer id;
 	String country;
 	String state;
+	
+	public CityDto() {
+		super();
+	}
 	
 	public String getName() {
 		return name;
