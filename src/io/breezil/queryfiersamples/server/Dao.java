@@ -37,18 +37,7 @@ public class Dao {
 		return instance;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private <T> QQuery convertDTO2Query(T sf) {
-		QQuery q = null;
-		try {
-			q = new QueryBuilder().parseQuery((QBase<? extends Object, ? extends Object>) sf);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return q;
-	}
-	
-	public <T, E> List<T> recuperarDTOs(QBaseClass<E, T> filtro) {
+	public <T, E> List<T> recuperarDTOs(QBase<E, T> filtro) {
         QQuery query = criarQueryDTO(filtro);
         System.out.println(query.toDTOQuery());
         
@@ -62,7 +51,7 @@ public class Dao {
         return dados;
     }
     
-    public <T, E> T recuperarDTO(QBaseClass<E, T> filtro) {
+    public <T, E> T recuperarDTO(QBase<E, T> filtro) {
         QQuery query = criarQueryDTO(filtro);
         System.out.println(query.toDTOQuery());
         
@@ -83,7 +72,7 @@ public class Dao {
 		return null;
 	}
 
-	public <T, E> List<E> recuperarEntidades(QBaseClass<E, T> filtro) {
+	public <T, E> List<E> recuperarEntidades(QBase<E, T> filtro) {
         QQuery query = criarQueryDTO(filtro);
         System.out.println(query.toEntityQuery());
         
@@ -96,7 +85,7 @@ public class Dao {
         return dados;
     }
     
-    public <T, E> E recuperarEntidade(QBaseClass<E, T> filtro) {
+    public <T, E> E recuperarEntidade(QBase<E, T> filtro) {
         QQuery query = criarQueryDTO(filtro);
         System.out.println(query.toEntityQuery());
         
@@ -117,23 +106,4 @@ public class Dao {
         return q;
     }
 	
-	@SuppressWarnings({ "deprecation", "unchecked" })
-	public <T> List<T> recuperarLista(T filtro) {
-		QQuery query = convertDTO2Query(filtro);
-		String sql = query.toDTOQuery();
-		Query q = entityManager.createQuery(sql);
-
-		System.out.println(sql);
-		
-	     q.unwrap(org.hibernate.Query.class).setResultTransformer(new QueryfierTransformer(CityFilter.class));
-	     
-	     query.getParameters().forEach((k, v) -> {
-	    	 q.setParameter(k, v);
-	     });
-	     
-	     List<T> dados = q.getResultList();
-	     
-		return dados;
-	}
-
 }

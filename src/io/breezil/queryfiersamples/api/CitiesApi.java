@@ -22,9 +22,12 @@ public class CitiesApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response get(@BeanParam CityFilter filter) {
     	
-    	List<CityDto> dados = Dao.instance().recuperarDTOs(filter);
+    	List<CityDto> dtos = Dao.instance().recuperarDTOs(filter);
     	
-        return Response.ok(dados).build();
+    	// Para recuperar as entidades 
+    	//List<City> entities = Dao.instance().recuperarEntidades(filter);
+    	
+        return Response.ok(dtos).build();
     }
  
 }

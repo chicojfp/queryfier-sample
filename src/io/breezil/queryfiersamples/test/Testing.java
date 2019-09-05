@@ -24,7 +24,7 @@ public class Testing {
 //		filter.addSortedColumns("country");
 		filter.setState("PE");
 		filter.setCountry("Brazil");
-		Dao.instance().recuperarLista(filter);
+		Dao.instance().recuperarDTOs(filter);
 	}
 
 	private static void multiFilter() {
@@ -34,7 +34,7 @@ public class Testing {
 //		filter.addSortedColumns("country");
 //		filter.getCountry().add("Brazil");
 //		filter.getCountry().add("Peru");
-		Dao.instance().recuperarLista(filter);
+		Dao.instance().recuperarDTOs(filter);
 	}
 
 	private static void previousTest() {
