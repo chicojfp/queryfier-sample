@@ -11,12 +11,12 @@ public class DataBaseBuilder {
 	
 	public static void createDataBase(EntityManager theManager) {
 
-        Person chicojfp = new Person("@chicojfp");
-        Person chico = new Person("chicó");
+        Person chicojfp = new Person("Brasileiro da Silva");
+        Person chico = new Person("Brasiliense Barbosa");
         theManager.persist(chico);
         theManager.persist(chicojfp);
         
-        City brasilia = new City("Brasilia", 1231l, 3000l);
+        City brasilia = new City("Brasília", 1231l, 3000l);
         brasilia.setMajor(chicojfp);
         theManager.persist(brasilia);
 
@@ -25,7 +25,7 @@ public class DataBaseBuilder {
         theManager.persist(brasil);
         
         theManager.getTransaction().begin();
-        State df = new State("DF", brasilia);
+        State df = new State(1, "DF", brasilia);
         df.setCountry(brasil);
         theManager.persist(df);
         
@@ -40,7 +40,7 @@ public class DataBaseBuilder {
         
         City recife = new City("Recife", 445l, 500000l);
         recife.setMajor(chico);
-        State pe = new State("PE", recife);
+        State pe = new State(2, "PE", recife);
         pe.setCountry(brasil);
         recife.setState(pe);
         theManager.persist(recife);

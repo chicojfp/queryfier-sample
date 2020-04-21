@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity(name = "state")
 public class State {
 	List<City> cities;
@@ -25,13 +27,15 @@ public class State {
 		
 	}
 
-	public State(String name, City capital) {
+	public State(Integer id, String name, City capital) {
+//		this.id = id;
 		this.name = name;
 		this.capital = capital;
 	}
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="kaugen" , strategy="increment")
+	@GeneratedValue(generator="kaugen")
 	public Integer getId() {
 		return id;
 	}
@@ -82,7 +86,7 @@ public class State {
 		this.foundation = foundation;
 	}
 
-	@OneToOne(orphanRemoval = true)
+	@OneToOne
 	public City getCapital() {
 		return capital;
 	}

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity(name = "country")
 public class Country {
 	List<State> state;
@@ -21,12 +23,14 @@ public class Country {
 	}
 
 	public Country(String name, City capital) {
+//		this.id = id;
 		this.name = name;
 		this.capital = capital;
 	}
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="country" , strategy="increment")
+	@GeneratedValue(generator="country")
 	public Integer getId() {
 		return id;
 	}

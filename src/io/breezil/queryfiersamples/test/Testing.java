@@ -6,35 +6,31 @@ import javax.persistence.Persistence;
 
 import io.breezil.queryfiersamples.api.filters.CityFilter;
 import io.breezil.queryfiersamples.api.filters.CityMultiFilter;
+import io.breezil.queryfiersamples.dao.Dao;
 import io.breezil.queryfiersamples.entities.City;
-import io.breezil.queryfiersamples.server.Dao;
 
 public class Testing {
 	
 	public static void main(String[] args) {
 		multiFilter();
-		
-//		singleFilter();
 	}
 
 	private static void singleFilter() {
 		CityFilter filter = new CityFilter();
 		filter.addColumns("name", "population");
 		filter.addSortedColumns("name");
-//		filter.addSortedColumns("country");
-		filter.setState("PE");
+
+		filter.setState(1);
 		filter.setCountry("Brazil");
-		Dao.instance().recuperarDTOs(filter);
+		Dao.instance().searchDTOs(filter);
 	}
 
 	private static void multiFilter() {
 		CityMultiFilter filter = new CityMultiFilter();
 		filter.addColumns("name", "population");
 		filter.addSortedColumns("name");
-//		filter.addSortedColumns("country");
-//		filter.getCountry().add("Brazil");
-//		filter.getCountry().add("Peru");
-		Dao.instance().recuperarDTOs(filter);
+
+		Dao.instance().searchDTOs(filter);
 	}
 
 	private static void previousTest() {

@@ -17,30 +17,29 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.breezil.queryfier.patch.JSonPatchOp;
-import io.breezil.queryfiersamples.api.dto.CityDto;
-import io.breezil.queryfiersamples.api.filters.CityFilter;
+import io.breezil.queryfiersamples.api.filters.PersonFilter;
 import io.breezil.queryfiersamples.controller.GenericController;
-import io.breezil.queryfiersamples.entities.City;
+import io.breezil.queryfiersamples.entities.Person;
  
-@Path("cities")
-public class CitiesApi {
-	private GenericController<City> controller;
+@Path("people")
+public class PersonApi {
+	private GenericController<Person> controller;
  
-    public void setcontroller(GenericController<City> controller) {
+    public void setcontroller(GenericController<Person> controller) {
         this.controller = controller;
     }
     
-    public CitiesApi() {
-    	this.controller = new GenericController<City>();
+    public PersonApi() {
+    	this.controller = new GenericController<Person>();
     }
 
     @GET
     @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-    public Response obterTodosDados(@BeanParam CityFilter filtro) {
-        List<CityDto> listaDados = this.controller.searchDTOs(filtro);
-        return Response.ok(listaDados).build();
+    public Response obterTodosDados(@BeanParam PersonFilter filtro) {
+        List<Person> data = this.controller.searchDTOs(filtro);
+        return Response.ok(data).build();
     }
     
     @GET
@@ -48,8 +47,8 @@ public class CitiesApi {
     @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
     public Response obterDadoServidor(@PathParam("id") Integer id) {
-        List<CityDto> listaDados = this.controller.searchDTOs(new CityFilter(id));
-        return Response.ok(listaDados).build();
+        List<Person> data = this.controller.searchDTOs(new PersonFilter(id));
+        return Response.ok(data).build();
     }
     
     @PATCH
@@ -57,15 +56,15 @@ public class CitiesApi {
     @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
     public Response atualizarDados(@PathParam("id") Integer id, JSonPatchOp[] ops) {
-        CityDto servidor = this.controller.updateModel(new CityFilter(id), Arrays.asList(ops));
-        return Response.ok(servidor).build();
+    	Person dto = this.controller.updateModel(new PersonFilter(id), Arrays.asList(ops));
+        return Response.ok(dto).build();
     }
     
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-    public Response removerRegistro(@BeanParam CityFilter filtro) {
+    public Response removerRegistro(@BeanParam PersonFilter filtro) {
         this.controller.deleteModel(filtro);
         return Response.ok().build();
     }
@@ -74,19 +73,18 @@ public class CitiesApi {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-    public Response inserirRegistro(@BeanParam CityFilter filtro, CityDto dados) {
-//    	filtro.setId(dados.getCodigo());
-        CityDto servidor = this.controller.createModel(filtro, dados);
-        return Response.ok(servidor).build();
+    public Response inserirRegistro(@BeanParam PersonFilter filtro, Person dados) {
+    	Person dto = this.controller.createModel(filtro, dados);
+        return Response.ok(dto).build();
     }
     
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-    public Response atualizarRegistro(@BeanParam CityFilter filtro, CityDto dados) {
-        CityDto servidor = this.controller.updateFullModel(filtro, dados);
-        return Response.ok(servidor).build();
+    public Response atualizarRegistro(@BeanParam PersonFilter filtro, Person dados) {
+    	Person dto = this.controller.updateFullModel(filtro, dados);
+        return Response.ok(dto).build();
     }
  
 }

@@ -4,17 +4,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity(name="person")
 public class Person {
 	Integer id;
 	String name;
+	
+	public Person() { }
 	
 	public Person(String name) {
 		this.name = name;
 	}
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="person" , strategy="increment")
+	@GeneratedValue(generator="person")
 	public Integer getId() {
 		return id;
 	}

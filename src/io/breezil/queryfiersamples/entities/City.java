@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity(name="city")
 public class City {
 	String name;
@@ -27,8 +29,10 @@ public class City {
 		this.area = area;
 		this.population = population;
 	}
+	
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="city" , strategy="increment")
+	@GeneratedValue(generator="city")
 	public Integer getId() {
 		return id;
 	}
