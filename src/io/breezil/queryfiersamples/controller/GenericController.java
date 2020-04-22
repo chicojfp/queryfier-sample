@@ -41,4 +41,15 @@ public class GenericController<T> extends GeneralService<T> {
 		return this.patch;
 	}
 
+	public ISerializer getSerializer() {
+		return serializer;
+	}
+
+	public void setSerializer(ISerializer serializer) {
+		this.serializer = serializer;
+		this.patch = new PatchJsonHelper(this.getDao(), this.getDeserializer());
+	}
+	
+	
+
 }

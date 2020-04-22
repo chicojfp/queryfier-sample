@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ws.rs.QueryParam;
 
 import io.breezil.queryfier.engine.QBaseClass;
-import io.breezil.queryfiersamples.entities.City;
 
 public class BaseFilter<E, D> extends QBaseClass<E, D> {
 

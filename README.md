@@ -134,5 +134,108 @@ curl -H "Content-Type: application/json" -X GET http://localhost:8080/cities/ -#
 curl -H "Content-Type: application/json" -X GET http://localhost:8080/people/ -# | python -m json.tool
 ```
 
+Ah... a funcionalidade também permite fazer alguns funções de agregação sobre os valores.
+Além de, claro, poder ser criados outros mecanismos de transformação e afregação de dados nas funcionalidades futuras.
+
+Exemplo de uso: Saber a população total de um estado somando os valores dos municípios. Basta, na API de cidades, agrupar por estado e somar sobre a coluna `population`.
+
+```shell
+curl -H "Content-Type: application/json" -X GET "http://localhost:8080/cities/?c=state_name&c=sum@population" -# | python -m json.tool
+```
+
+Retorno:
+
+```json
+[
+    {
+        "state_name": "DF",
+        "stats": {
+            "sum_population": 43000
+        }
+    },
+    {
+        "state_name": "ES",
+        "stats": {
+            "sum_population": 76767
+        }
+    },
+    {
+        "state_name": "PA",
+        "stats": {
+            "sum_population": 45621
+        }
+    },
+    {
+        "state_name": "PE",
+        "stats": {
+            "sum_population": 500210
+        }
+    },
+    {
+        "state_name": "PR",
+        "stats": {
+            "sum_population": 50000
+        }
+    }
+]
+```
+
+Os dados são retornados de forma padronizada na propriedade stats. Tal objeto terá tantas propriedades quantas forem as funções de agregação solicitadas utilizando o seguinte padrão `FuncaoAgregacao_nomeCampo`.
+
+``shell
+curl -H "Content-Type: application/json" -X GET "http://localhost:8080/cities/?c=state_name&c=sum@population&c=avg@population&c=min@population&c=max@population" -# | python -m json.tool
+`` 
+Exemplo:
+
+```json
+[
+    {
+        "state_name": "DF",
+        "stats": {
+            "avg_population": 21500.0,
+            "max_population": 40000,
+            "min_population": 3000,
+            "sum_population": 43000
+        }
+    },
+    {
+        "state_name": "ES",
+        "stats": {
+            "avg_population": 76767.0,
+            "max_population": 76767,
+            "min_population": 76767,
+            "sum_population": 76767
+        }
+    },
+    {
+        "state_name": "PA",
+        "stats": {
+            "avg_population": 45621.0,
+            "max_population": 45621,
+            "min_population": 45621,
+            "sum_population": 45621
+        }
+    },
+    {
+        "state_name": "PE",
+        "stats": {
+            "avg_population": 166736.66666666666,
+            "max_population": 500000,
+            "min_population": 10,
+            "sum_population": 500210
+        }
+    },
+    {
+        "state_name": "PR",
+        "stats": {
+            "avg_population": 50000.0,
+            "max_population": 50000,
+            "min_population": 50000,
+            "sum_population": 50000
+        }
+    }
+]
+```
+
 
 

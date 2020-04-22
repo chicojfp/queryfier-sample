@@ -17,9 +17,9 @@ curl -d '[{"op":"add", "from":"/governor", "patch":"6"}]' -H "Content-Type: appl
 curl -d '[{"op":"add", "from":"/governor", "patch":"7"}]' -H "Content-Type: application/json" -X PATCH http://localhost:8080/states/4
 curl -d '[{"op":"add", "from":"/governor", "patch":"8"}]' -H "Content-Type: application/json" -X PATCH http://localhost:8080/states/5
 
-curl -d '{"name":"Belém", "state":"4"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
-curl -d '{"name":"Curitiba", "state":"3"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
-curl -d '{"name":"Vitória", "state":"5"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
+curl -d '{"name":"Belém", "state":"4", "population": "45621"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
+curl -d '{"name":"Curitiba", "state":"3", "population": "50000"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
+curl -d '{"name":"Vitória", "state":"5", "population": "76767"}' -H "Content-Type: application/json" -X POST http://localhost:8080/cities
 
 curl -d '[{"op":"add", "from":"/capital", "patch":"7"}]' -H "Content-Type: application/json" -X PATCH http://localhost:8080/states/4
 curl -d '[{"op":"add", "from":"/capital", "patch":"6"}]' -H "Content-Type: application/json" -X PATCH http://localhost:8080/states/3
@@ -33,3 +33,6 @@ curl -d '[{"op":"add", "from":"/governor", "patch":"5"}]' -H "Content-Type: appl
 curl -H "Content-Type: application/json" -X GET http://localhost:8080/states/ -# | python -m json.tool
 curl -H "Content-Type: application/json" -X GET http://localhost:8080/cities/ -# | python -m json.tool
 curl -H "Content-Type: application/json" -X GET http://localhost:8080/people/ -# | python -m json.tool
+
+
+curl -H "Content-Type: application/json" -X GET "http://localhost:8080/cities/?c=state_name&c=sum@population&c=avg@population&c=min@population&c=max@population" -# | python -m json.tool

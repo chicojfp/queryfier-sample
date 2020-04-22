@@ -21,6 +21,7 @@ import io.breezil.queryfiersamples.api.dto.CityDto;
 import io.breezil.queryfiersamples.api.filters.CityFilter;
 import io.breezil.queryfiersamples.controller.GenericController;
 import io.breezil.queryfiersamples.entities.City;
+import io.breezil.queryfiersamples.infra.SampleSerializer;
  
 @Path("cities")
 public class CitiesApi {
@@ -32,6 +33,7 @@ public class CitiesApi {
     
     public CitiesApi() {
     	this.controller = new GenericController<City>();
+    	this.controller.setSerializer(new SampleSerializer());
     }
 
     @GET

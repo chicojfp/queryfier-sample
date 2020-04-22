@@ -21,6 +21,7 @@ import io.breezil.queryfiersamples.api.dto.StateDto;
 import io.breezil.queryfiersamples.api.filters.StateFilter;
 import io.breezil.queryfiersamples.controller.GenericController;
 import io.breezil.queryfiersamples.entities.State;
+import io.breezil.queryfiersamples.infra.SampleSerializer;
  
 @Path("states")
 public class StatesApi {
@@ -32,6 +33,7 @@ public class StatesApi {
     
     public StatesApi() {
     	this.controller = new GenericController<State>();
+    	this.controller.setSerializer(new SampleSerializer());
     }
 
     @GET
